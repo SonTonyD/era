@@ -1,0 +1,39 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 50px;
+}
+
+#result {
+  font-size: 1.5em;
+  margin: 20px;
+}
+
+button {
+  font-size: 1em;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+/* Bouton petit */
+.btn-small {
+  font-size: 0.8em;
+  padding: 5px 10px;
+}
+
+/* Bouton moyen (par défaut) */
+.btn-medium {
+  font-size: 1em;
+  padding: 10px 20px;
+}
+
+/* Bouton grand */
+.btn-large {
+  font-size: 1.2em;
+  padding: 15px 30px;
+}
+
+.play-roulette-container {
+  display: none;
+}
