@@ -45,16 +45,27 @@ function calculateMartingale() {
   let sum = initialBet;
   let lose = initialBet;
   let previousLose = initialBet;
-  let results = "";
+  const resultContainer = document.getElementById("resultats");
+
+  // Effacer les anciens résultats
+  while (resultContainer.firstChild) {
+    resultContainer.removeChild(resultContainer.firstChild);
+  }
 
   for (let i = 1; i <= 12; i++) {
-    results += `Perte ${i} : ${lose} euros ; Somme engagée : ${sum} euros<br>`;
+    const resultText = `Perte ${i} : ${lose} euros ; Somme engagée : ${sum} euros`;
+
+    // Créer un nouvel élément p pour chaque ligne
+    const resultP = document.createElement("p");
+    resultP.textContent = resultText; // Insérer le texte dans le paragraphe
+
+    // Ajouter ce paragraphe dans le conteneur des résultats
+    resultContainer.appendChild(resultP);
+
     lose = previousLose * 2;
     previousLose = lose;
     sum += lose;
   }
-
-  document.getElementById("resultats").innerHTML = results;
 }
 
 function playRoulette() {
