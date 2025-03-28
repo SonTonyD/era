@@ -35,8 +35,32 @@ function isWinningBet(betType, betNumber, result) {
   return -1;
 }
 
+function calculateMartingale() {
+  const initialBet = parseFloat(document.getElementById("initialBet").value);
+  if (isNaN(initialBet) || initialBet <= 0) {
+    alert("Veuillez entrer une mise initiale valide.");
+    return;
+  }
+
+  let sum = initialBet;
+  let lose = initialBet;
+  let previousLose = initialBet;
+  let results = "";
+
+  for (let i = 1; i <= 12; i++) {
+    results += `Perte ${i} : ${lose} euros ; Somme engagée : ${sum} euros<br>`;
+    lose = previousLose * 2;
+    previousLose = lose;
+    sum += lose;
+  }
+
+  document.getElementById("results").innerHTML = results;
+}
+
 function playRoulette() {
   const betType = document.getElementById("betType").value;
+  let resultDiv = document.getElementById("result");
+
   let betNumber =
     betType === "number"
       ? parseInt(document.getElementById("betNumber").value)
@@ -54,14 +78,12 @@ function playRoulette() {
   if (multiplier > 0) {
     const gain = betAmount * multiplier;
     bankroll += gain;
-    document.getElementById(
-      "result"
-    ).textContent = `Résultat: ${result} - Gagné! +${gain}€`;
+    resultDiv.style.color = "darkgreen";
+    resultDiv.textContent = `Résultat: ${result} - Gagné! +${gain}€`;
   } else {
     bankroll -= betAmount;
-    document.getElementById(
-      "result"
-    ).textContent = `Résultat: ${result} - Perdu!`;
+    resultDiv.style.color = "darkred";
+    resultDiv.textContent = `Résultat: ${result} - Perdu!`;
   }
 
   document.getElementById("bankroll").textContent = bankroll;

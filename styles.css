@@ -4,6 +4,15 @@ body {
   margin: 50px;
 }
 
+h1 {
+  font-size: 1.5rem;
+}
+
+.main-menu {
+  display: flex;
+  flex-direction: row;
+}
+
 #result {
   font-size: 1.5em;
   margin: 20px;
@@ -32,6 +41,10 @@ button {
 .btn-large {
   font-size: 1.2em;
   padding: 15px 30px;
+}
+
+.martingale-container {
+  display: none;
 }
 
 .play-roulette-container {
