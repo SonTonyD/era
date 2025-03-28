@@ -88,11 +88,11 @@ function playRoulette() {
 
   if (multiplier > 0) {
     const gain = betAmount * multiplier;
-    bankroll += gain;
+    bankroll = parseInt(bankroll) + gain;
     resultDiv.style.color = "darkgreen";
     resultDiv.textContent = `Résultat: ${result} - Gagné! +${gain}€`;
   } else {
-    bankroll -= betAmount;
+    bankroll = parseInt(bankroll) - betAmount;
     resultDiv.style.color = "darkred";
     resultDiv.textContent = `Résultat: ${result} - Perdu!`;
   }
