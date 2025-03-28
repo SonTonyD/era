@@ -54,7 +54,7 @@ function calculateMartingale() {
     sum += lose;
   }
 
-  document.getElementById("results").innerHTML = results;
+  document.getElementById("resultats").innerHTML = results;
 }
 
 function playRoulette() {
