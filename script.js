@@ -183,7 +183,7 @@ function runSimulation() {
 }
 
 function calculerEpargne() {
-  alert("1");
+  console.log("coucou");
   const mois = [
     "janvier",
     "fevrier",
@@ -198,7 +198,6 @@ function calculerEpargne() {
     "novembre",
     "decembre",
   ];
-  alert("2");
 
   const argentActuel =
     parseInt(document.getElementById("argentActuel").value) || 0;
@@ -211,20 +210,17 @@ function calculerEpargne() {
   const anneeDepart =
     parseInt(document.getElementById("anneeDepart").value) || 0;
 
-  alert("3");
   const resultContainer = document.getElementById("epargneResults");
 
   // Effacer les anciens résultats
   while (resultContainer.firstChild) {
     resultContainer.removeChild(resultContainer.firstChild);
   }
-  alert("4");
 
   let currentYear = parseInt(anneeDepart);
   let currentMonth = moisDepart;
 
   let argent = argentActuel;
-  alert("5");
 
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < mois.length; j++) {
@@ -243,5 +239,4 @@ function calculerEpargne() {
     }
     currentYear = parseInt(currentYear) + 1;
   }
-  alert("6");
 }
