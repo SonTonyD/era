@@ -221,7 +221,7 @@ function calculerEpargne() {
     for (let j = 0; j < mois.length; j++) {
       if (
         parseInt(currentYear) === parseInt(anneeDepart) &&
-        parseInt(j) < parseInt(ois.indexOf(moisDepart))
+        parseInt(j) < parseInt(mois.indexOf(moisDepart))
       ) {
       } else {
         argent = parseInt(argent) + epargneMensuel;
