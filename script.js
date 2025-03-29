@@ -181,3 +181,54 @@ function runSimulation() {
     2
   )}% | Mean Final Turn: ${meanFinalTurn.toFixed(2)}`;
 }
+
+function calculerEpargne() {
+  const mois = [
+    "janvier",
+    "fevrier",
+    "mars",
+    "avril",
+    "mai",
+    "juin",
+    "juillet",
+    "aout",
+    "septembre",
+    "octobre",
+    "novembre",
+    "decembre",
+  ];
+
+  const argentActuel = parseInt(document.getElementById("argentActuel").value);
+  const epargneMensuel = parseInt(
+    document.getElementById("epargneMensuel").value
+  );
+  const moisDepart = document.getElementById("moisDepart").value;
+  const anneeDepart = parseInt(document.getElementById("anneeDepart").value);
+
+  const resultContainer = document.getElementById("epargneResults");
+
+  // Effacer les anciens résultats
+  while (resultContainer.firstChild) {
+    resultContainer.removeChild(resultContainer.firstChild);
+  }
+
+  let currentYear = parseInt(anneeDepart);
+  let currentMonth = moisDepart;
+
+  let argent = argentActuel;
+
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < mois.length; j++) {
+      if (currentYear === anneeDepart && j < mois.indexOf(moisDepart)) {
+      } else {
+        argent = parseInt(argent) + epargneMensuel;
+        const resultText = `Année ${currentYear} ${mois[j]} ->  ${argent} euros`;
+        const resultP = document.createElement("p");
+        resultP.textContent = resultText;
+
+        resultContainer.appendChild(resultP);
+      }
+    }
+    currentYear = parseInt(currentYear) + 1;
+  }
+}

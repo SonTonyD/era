@@ -41,19 +41,3 @@ button {
   font-size: 1.2em;
   padding: 15px 30px;
 }
-
-.martingale-container {
-  display: none;
-}
-
-.play-roulette-container {
-  display: none;
-}
-
-.martingale-sim-container {
-  display: none;
-}
-
-.analytic-container {
-  display: none;
-}

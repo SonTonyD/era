@@ -18,8 +18,9 @@
         Simulation multiple martingale
       </button>
       <button onclick="openMenu('analytic-container')">
-        Analyse martingale
+        Analyse martingale (En cours de développement)
       </button>
+      <button onclick="openMenu('epargne-container')">Calcul Epargne</button>
     </div>
 
     <div class="martingale-container" style="display: none">
@@ -102,6 +103,46 @@
     </div>
 
     <div class="analytic-container" style="display: none"></div>
+
+    <div class="epargne-container" style="display: none">
+      <h1>Calculateur d'épargne par mois</h1>
+      <div>
+        <label for="argentActuel">Argent actuel: </label>
+        <input type="number" id="argentActuel" min="1" value="0" />
+      </div>
+      <div>
+        <label for="epargneMensuel">Epargne mensuelle: </label>
+        <input type="number" id="epargneMensuel" min="1" value="100" />
+      </div>
+
+      <div>
+        <label for="moisDepart">Mois de départ :</label>
+        <select id="moisDepart">
+          <option value="janvier">Janvier</option>
+          <option value="fevrier">Février</option>
+          <option value="mars">Mars</option>
+          <option value="avril">Avril</option>
+          <option value="mai">Mai</option>
+          <option value="juin">Juin</option>
+          <option value="juillet">Juillet</option>
+          <option value="aout">Août</option>
+          <option value="septembre">Septembre</option>
+          <option value="octobre">Octobre</option>
+          <option value="novembre">Novembre</option>
+          <option value="decembre">Décembre</option>
+        </select>
+      </div>
+      <div>
+        <label for="anneeDepart">Année de départ: </label>
+        <input type="number" id="anneeDepart" value="2025" />
+      </div>
+      <button onclick="calculerEpargne()">Calculer</button>
+      <div
+        class="epargneResults"
+        style="font-size: 0.6rem"
+        id="epargneResults"
+      ></div>
+    </div>
 
     <script src="script.js"></script>
   </body>
