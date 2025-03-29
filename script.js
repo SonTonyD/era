@@ -103,3 +103,81 @@ function playRoulette() {
     alert("Vous avez perdu tout votre argent ! Fin de la partie.");
   }
 }
+
+function simulateMartingale(initialBankroll, initialBet, targetGain) {
+  let currentTurn = 0;
+  let loseStreak = 0;
+
+  let bankroll = initialBankroll;
+  let maxLoseSteak = 1;
+
+  let gain = 0;
+  let result = 0;
+  let multiplier = 0;
+
+  let betAmount = 0;
+
+  const betType = "red";
+
+  while (bankroll > 0 && bankroll - initialBankroll < targetGain) {
+    betAmount = initialBet * 2 ** loseStreak;
+    result = spinRoulette();
+    multiplier = isWinningBet(betType, null, result);
+
+    if (multiplier > 0) {
+      gain = betAmount * multiplier;
+      bankroll = parseInt(bankroll) + gain;
+      loseStreak = 0;
+    } else {
+      bankroll = parseInt(bankroll) - betAmount;
+      loseStreak += 1;
+      if (maxLoseSteak < loseStreak) {
+        maxLoseSteak = loseStreak;
+      }
+    }
+    currentTurn = parseInt(currentTurn) + 1;
+  }
+  return { bankroll: parseInt(bankroll), turns: parseInt(currentTurn) };
+}
+
+function runSimulation() {
+  const simInitialBankroll = parseInt(
+    document.getElementById("simInitialBankroll").value
+  );
+  const simInitialBet = parseInt(
+    document.getElementById("simInitialBet").value
+  );
+  const simTargetGain = parseInt(
+    document.getElementById("simTargetGain").value
+  );
+  const simNbSim = parseInt(document.getElementById("simNbSim").value);
+
+  let currentSim = 0;
+  let sumFinalTurn = 0;
+  let sumSuccess = 0;
+
+  let result = null;
+
+  while (currentSim < simNbSim) {
+    result = simulateMartingale(
+      simInitialBankroll,
+      simInitialBet,
+      simTargetGain
+    );
+
+    if (result.bankroll > 0) {
+      sumSuccess = parseInt(sumSuccess) + 1;
+    }
+
+    sumFinalTurn = parseInt(sumFinalTurn) + parseInt(result.turns);
+    currentSim = parseInt(currentSim) + 1;
+  }
+
+  const successRate = sumSuccess / simNbSim;
+  const meanFinalTurn = sumFinalTurn / simNbSim;
+
+  let resultDiv = document.getElementById("simResults");
+  resultDiv.textContent = `Success Rate: ${(successRate * 100).toFixed(
+    2
+  )}% | Mean Final Turn: ${meanFinalTurn.toFixed(2)}`;
+}

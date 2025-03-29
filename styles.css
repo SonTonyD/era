@@ -9,8 +9,7 @@ h1 {
 }
 
 .main-menu {
-  display: flex;
-  flex-direction: row;
+  display: grid;
 }
 
 #result {
@@ -48,5 +47,13 @@ button {
 }
 
 .play-roulette-container {
+  display: none;
+}
+
+.martingale-sim-container {
+  display: none;
+}
+
+.analytic-container {
   display: none;
 }
