@@ -219,7 +219,10 @@ function calculerEpargne() {
 
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < mois.length; j++) {
-      if (currentYear === anneeDepart && j < mois.indexOf(moisDepart)) {
+      if (
+        parseInt(currentYear) === parseInt(anneeDepart) &&
+        parseInt(j) < parseInt(ois.indexOf(moisDepart))
+      ) {
       } else {
         argent = parseInt(argent) + epargneMensuel;
         const resultText = `Année ${currentYear} ${mois[j]} ->  ${argent} euros`;
