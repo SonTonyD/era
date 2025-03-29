@@ -198,12 +198,16 @@ function calculerEpargne() {
     "decembre",
   ];
 
-  const argentActuel = parseInt(document.getElementById("argentActuel").value);
-  const epargneMensuel = parseInt(
-    document.getElementById("epargneMensuel").value
-  );
-  const moisDepart = document.getElementById("moisDepart").value;
-  const anneeDepart = parseInt(document.getElementById("anneeDepart").value);
+  const argentActuel =
+    parseInt(document.getElementById("argentActuel").value) || 0;
+  const epargneMensuel =
+    parseInt(document.getElementById("epargneMensuel").value) || 0;
+  const moisDepart = document
+    .getElementById("moisDepart")
+    .value.trim()
+    .toLowerCase();
+  const anneeDepart =
+    parseInt(document.getElementById("anneeDepart").value) || 0;
 
   const resultContainer = document.getElementById("epargneResults");
 
