@@ -152,6 +152,23 @@ function runSimulation() {
   );
   const simNbSim = parseInt(document.getElementById("simNbSim").value);
 
+  const resultTextContent = executeSim(
+    simInitialBankroll,
+    simInitialBet,
+    simTargetGain,
+    simNbSim
+  );
+
+  let resultDiv = document.getElementById("simResults");
+  resultDiv.textContent = resultTextContent;
+}
+
+function executeSim(
+  simInitialBankroll,
+  simInitialBet,
+  simTargetGain,
+  simNbSim
+) {
   let currentSim = 0;
   let sumFinalTurn = 0;
   let sumSuccess = 0;
@@ -176,10 +193,64 @@ function runSimulation() {
   const successRate = sumSuccess / simNbSim;
   const meanFinalTurn = sumFinalTurn / simNbSim;
 
-  let resultDiv = document.getElementById("simResults");
-  resultDiv.textContent = `Success Rate: ${(successRate * 100).toFixed(
+  return `Success Rate: ${(successRate * 100).toFixed(
     2
   )}% | Mean Final Turn: ${meanFinalTurn.toFixed(2)}`;
+}
+
+function calculerMio() {
+  const resultContainer = document.getElementById("mioResults");
+  // Effacer les anciens résultats
+  while (resultContainer.firstChild) {
+    resultContainer.removeChild(resultContainer.firstChild);
+  }
+
+  const mioInitialBankroll = parseInt(
+    document.getElementById("mioInitialBankroll").value
+  );
+  const mioInitialBetMin = parseInt(
+    document.getElementById("mioInitialBetMin").value
+  );
+  const mioInitialBetMax = parseInt(
+    document.getElementById("mioInitialBetMax").value
+  );
+  const mioInitialBetPas = parseInt(
+    document.getElementById("mioInitialBetPas").value
+  );
+  const mioTargetGain = parseInt(
+    document.getElementById("mioTargetGain").value
+  );
+  const mioNbSim = parseInt(document.getElementById("mioNbSim").value);
+
+  //Calcul de l'ensemble des initiales bet possibles
+  const resultats = genererListe(
+    mioInitialBetMin,
+    mioInitialBetMax,
+    mioInitialBetPas
+  );
+
+  for (let i = 0; i < resultats.length; i++) {
+    const currentInitialBet = resultats[i];
+    const simResultText = executeSim(
+      mioInitialBankroll,
+      currentInitialBet,
+      mioTargetGain,
+      mioNbSim
+    );
+
+    const resultP = document.createElement("p");
+    resultP.textContent = `Initial Bet : ${currentInitialBet} ` + simResultText;
+
+    resultContainer.appendChild(resultP);
+  }
+}
+
+function genererListe(min, max, pas) {
+  const liste = [];
+  for (let i = min; i <= max; i += pas) {
+    liste.push(i);
+  }
+  return liste;
 }
 
 function calculerEpargne() {

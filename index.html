@@ -17,8 +17,8 @@
       <button onclick="openMenu('martingale-sim-container')">
         Simulation multiple martingale
       </button>
-      <button onclick="openMenu('analytic-container')">
-        Analyse martingale (En cours de développement)
+      <button onclick="openMenu('mio-container')">
+        Mise initiale optimale
       </button>
       <button onclick="openMenu('epargne-container')">Calcul Epargne</button>
     </div>
@@ -102,7 +102,57 @@
       <div id="simResults"></div>
     </div>
 
-    <div class="analytic-container" style="display: none"></div>
+    <div class="mio-container" style="display: none">
+      <h1>Mise initiale optimale</h1>
+      <div>
+        <label for="mioInitialBankroll">Bankroll initiale: </label>
+        <input type="number" id="mioInitialBankroll" min="1" value="300" />
+      </div>
+
+      <div>
+        <div>
+          <label for="mioInitialBetMin">Mise initiale min: </label>
+          <input
+            class="input-small"
+            type="number"
+            id="mioInitialBetMin"
+            value="1"
+          />
+        </div>
+        <div>
+          <label for="mioInitialBetMax">Mise initiale max: </label>
+          <input
+            class="input-small"
+            type="number"
+            id="mioInitialBetMax"
+            value="25"
+          />
+        </div>
+        <div>
+          <label for="mioInitialBetPas">Mise initiale pas: </label>
+          <input
+            class="input-small"
+            type="number"
+            id="mioInitialBetPas"
+            value="1"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="mioTargetGain">Gain cible: </label>
+        <input type="number" id="mioTargetGain" value="30" />
+      </div>
+
+      <div>
+        <label for="mioNbSim">Nombre de simulation: </label>
+        <input type="number" id="mioNbSim" value="10000" />
+      </div>
+
+      <button onclick="calculerMio()">Calculer Mise Initiale Optimale</button>
+
+      <div style="font-size: 0.6rem" id="mioResults"></div>
+    </div>
 
     <div class="epargne-container" style="display: none">
       <h1>Calculateur d'épargne par mois</h1>
