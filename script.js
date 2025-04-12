@@ -152,15 +152,19 @@ function runSimulation() {
   );
   const simNbSim = parseInt(document.getElementById("simNbSim").value);
 
-  const resultTextContent = executeSim(
+  const { successRate, meanFinalTurn } = executeSim(
     simInitialBankroll,
     simInitialBet,
     simTargetGain,
     simNbSim
   );
 
+  const simResultText = `Success Rate: ${(successRate * 100).toFixed(
+    2
+  )}% | Mean Final Turn: ${meanFinalTurn.toFixed(2)}`;
+
   let resultDiv = document.getElementById("simResults");
-  resultDiv.textContent = resultTextContent;
+  resultDiv.textContent = simResultText;
 }
 
 function executeSim(
@@ -193,9 +197,7 @@ function executeSim(
   const successRate = sumSuccess / simNbSim;
   const meanFinalTurn = sumFinalTurn / simNbSim;
 
-  return `Success Rate: ${(successRate * 100).toFixed(
-    2
-  )}% | Mean Final Turn: ${meanFinalTurn.toFixed(2)}`;
+  return { successRate, meanFinalTurn };
 }
 
 function calculerMio() {
@@ -231,13 +233,16 @@ function calculerMio() {
 
   for (let i = 0; i < resultats.length; i++) {
     const currentInitialBet = resultats[i];
-    const simResultText = executeSim(
+    const { successRate, meanFinalTurn } = executeSim(
       mioInitialBankroll,
       currentInitialBet,
       mioTargetGain,
       mioNbSim
     );
 
+    const simResultText = `Success Rate: ${(successRate * 100).toFixed(
+      2
+    )}% | Mean Final Turn: ${meanFinalTurn.toFixed(2)}`;
     const resultP = document.createElement("p");
     resultP.textContent = `Initial Bet : ${currentInitialBet} ` + simResultText;
 
