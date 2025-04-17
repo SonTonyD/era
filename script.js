@@ -202,7 +202,6 @@ function executeSim(
 
 function calculerMio() {
   const resultContainer = document.getElementById("mioResults");
-  // Effacer les anciens résultats
   while (resultContainer.firstChild) {
     resultContainer.removeChild(resultContainer.firstChild);
   }
@@ -224,30 +223,47 @@ function calculerMio() {
   );
   const mioNbSim = parseInt(document.getElementById("mioNbSim").value);
 
-  //Calcul de l'ensemble des initiales bet possibles
   const resultats = genererListe(
     mioInitialBetMin,
     mioInitialBetMax,
     mioInitialBetPas
   );
 
-  for (let i = 0; i < resultats.length; i++) {
-    const currentInitialBet = resultats[i];
+  // Étape 1 : exécuter les simulations et stocker les résultats
+  const simulations = resultats.map((initialBet) => {
     const { successRate, meanFinalTurn } = executeSim(
       mioInitialBankroll,
-      currentInitialBet,
+      initialBet,
       mioTargetGain,
       mioNbSim
     );
+    return {
+      initialBet,
+      successRate,
+      meanFinalTurn,
+    };
+  });
 
-    const simResultText = `Success Rate: ${(successRate * 100).toFixed(
-      2
-    )}% | Mean Final Turn: ${meanFinalTurn.toFixed(2)}`;
+  // Étape 2 : trier par successRate décroissant
+  const top5 = [...simulations]
+    .sort((a, b) => b.successRate - a.successRate)
+    .slice(0, 5);
+
+  // Étape 3 : afficher les résultats avec mise en forme
+  simulations.forEach((sim) => {
     const resultP = document.createElement("p");
-    resultP.textContent = `Initial Bet : ${currentInitialBet} ` + simResultText;
+    resultP.textContent = `Initial Bet : ${sim.initialBet} | Success Rate: ${(
+      sim.successRate * 100
+    ).toFixed(2)}% | Mean Final Turn: ${sim.meanFinalTurn.toFixed(2)}`;
+
+    // Mise en forme vert foncé si dans le top 5
+    if (top5.some((top) => top.initialBet === sim.initialBet)) {
+      resultP.style.color = "darkgreen";
+      resultP.style.fontWeight = "bold";
+    }
 
     resultContainer.appendChild(resultP);
-  }
+  });
 }
 
 function genererListe(min, max, pas) {
